@@ -27,6 +27,7 @@ function SongFeature(props) {
   ];
   return (
     <>
+      <h1>Bạn phải thích</h1>
       <SongList songList={songList}></SongList>
     </>
   );

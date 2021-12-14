@@ -1,16 +1,32 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import TodoList from './components/TodoList'
 
-TodoFeatures.propTypes = {
+TodoFeature.propTypes = {
     
 };
 
-function TodoFeatures(props) {
+function TodoFeature(props) {
+    const todoList = [
+        {
+            id: 1,
+            name: 'eat'
+        },
+        {
+            id: 2,
+            name: 'code'
+        },
+        {
+            id: 3,
+            name:'sleep'
+        }
+    ]
     return (
         <div>
-            
+            <h1>TodoList</h1>
+            <TodoList todoList={todoList}></TodoList>
         </div>
     );
 }
 
-export default TodoFeatures;
+export default TodoFeature;

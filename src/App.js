@@ -2,6 +2,14 @@ import logo from './logo.svg';
 import './App.css';
 
 function App() {
+  const name = 'Kien'
+  const age = 21
+  const isMale = true
+  const profile = {
+    name: 'Huynh Trung Kien'
+  }
+  const course = ['React', 'Javascript', 'PHP']
+    
   return (
     <div className="App">
       <header className="App-header">
@@ -9,13 +17,19 @@ function App() {
         <p>
           Trung Kien
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-        </a>
+          <p>Hello {name} - {age} yeaars - {isMale ? 'Male' : 'Female'}</p>
+          {isMale && (
+            <>
+              <p>Male 1</p>
+              <p>Male 2</p>
+              <p>Male 3</p>
+            </>
+          )}
+
+          {profile.name}
+          <ul>
+            {course.map(item => (<li key={item}>{item}</li>))}
+          </ul>
       </header>
     </div>
   );

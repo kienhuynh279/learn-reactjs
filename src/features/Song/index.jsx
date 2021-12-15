@@ -1,8 +1,5 @@
 import React from "react";
-import PropTypes from "prop-types";
 import SongList from "./components/SongList";
-
-SongFeature.propTypes = {};
 
 function SongFeature(props) {
   const songList = [

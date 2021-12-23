@@ -22,7 +22,7 @@ function Pagonation(props) {
   }
 
   return (
-    <div>
+    <div style={{ display: "inline-block" }}>
       <button disabled={_page <= 1} onClick={() => handlePageChange(_page - 1)}>
         Prev
       </button>

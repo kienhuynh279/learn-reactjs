@@ -1,26 +1,68 @@
 import React from "react";
-import PropTypes from "prop-types";
+import { useEffect, useState } from "react";
+import queryString from "query-string";
+import Pagination from "./Components/Pagination";
+import Post from "./Components/PostItem";
+import PostFillterForm from "./Components/PostFillterForm";
 
-PostList.propTypes = {
-  posts: PropTypes.array,
-};
+function PostListFeature(props) {
+  const [postList, setPostList] = useState([]);
+  const [pagination, setPagination] = useState({
+    _page: 1,
+    _limit: 10,
+    _totalRows: 49,
+  });
+  const [filters, setFilters] = useState({
+    _limit: 10,
+    _page: 1,
+    title_like: "",
+  });
 
-PostList.defaultProps = {
-  posts: [],
-};
+  useEffect(() => {
+    async function fetchPostList() {
+      try {
+        const paramString = queryString.stringify(filters);
+        const requestUrl = `http://js-post-api.herokuapp.com/api/posts?${paramString}`;
+        const response = await fetch(requestUrl);
+        const responseJSON = await response.json();
 
-function PostList(props) {
-  const { posts } = props;
+        const { data, pagination } = responseJSON;
+        setPostList(data);
+        setPagination(pagination);
+      } catch (error) {
+        console.log("Falied");
+      }
+    }
 
+    fetchPostList();
+  }, [filters]);
+
+  function handlePageChange(newPage) {
+    console.log("New  Page: ", newPage);
+    setFilters({
+      ...filters,
+      _page: newPage,
+    });
+  }
+
+  function handleFillterChange(newFillter) {
+    console.log("Fillter", newFillter);
+    setFilters({
+      ...filters,
+      _page: 1,
+      title_like: newFillter.searchTerm,
+    });
+  }
   return (
     <div>
-      <ul>
-        {posts.map((post) => (
-          <li key={post.id}>{post.title}</li>
-        ))}
-      </ul>
+      <PostFillterForm onSubmit={handleFillterChange}></PostFillterForm>
+      <Post posts={postList} />
+      <Pagination
+        pagination={pagination}
+        onPageChange={handlePageChange}
+      ></Pagination>
     </div>
   );
 }
 
-export default PostList;
+export default PostListFeature;

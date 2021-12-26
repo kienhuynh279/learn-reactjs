@@ -14,7 +14,7 @@ function PostFillterForm(props) {
   const [searchTerm, setSearchTerm] = useState("");
   const typingTimeOutRef = useRef(null);
 
-  function handleSearchTerm(e) {
+  function handleSearchTerm(e) {    
     const value = e.target.value;
     setSearchTerm(value);
 

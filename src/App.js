@@ -1,14 +1,20 @@
 // import './App.css';
 
+import { useState } from "react";
+import ClockFeature from "./features/Clock";
 import PostListFeature from "./features/PostList";
 
 function App() {
+  const [showClock, setShowClock] = useState(true)
+
   return (
     <div className="App">
       <h1>
         React Hooks
       </h1>
       <PostListFeature></PostListFeature>
+      {showClock && <ClockFeature></ClockFeature>}
+      <button onClick={() => {setShowClock(false)}}>Hide Clock</button>
     </div>
   );
 }

@@ -1,12 +1,15 @@
 .App {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
 }
 
-.color-box {
-    width: 100px;
-    height: 100px;
+p {
+    display: inline-block;
+    margin: 10px 20px;
+}
+
+.active {
+    text-decoration: none;
+    font-style: bold;
+    color: lawngreen;
 }

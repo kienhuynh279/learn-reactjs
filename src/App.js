@@ -3,7 +3,7 @@
 // import ClockFeature from "./features/Clock";
 // import PostListFeature from "./features/PostList";
 
-import { NavLink, Link, Route, Switch } from "react-router-dom";
+import { NavLink, Route, Switch } from "react-router-dom";
 import TodoFeature from "./features/Todo";
 import SongFeature from "./features/Song";
 import BetterClockFeature from "./features/BetterClock";

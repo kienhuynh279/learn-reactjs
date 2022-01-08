@@ -1,11 +1,11 @@
-import React, { useEffect, useMemo } from "react";
-import queryString from "query-string";
-import TodoList from "../../components/TodoList";
-import { useState } from "react";
-import TodoForm from "../../components/TodoForm";
-import { useLocation } from "react-router-dom";
-import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
-import { useRouteMatch } from "react-router-dom";
+import React, { useEffect, useMemo } from 'react';
+import queryString from 'query-string';
+import TodoList from '../../components/TodoList';
+import { useState } from 'react';
+import TodoForm from '../../components/TodoForm';
+import { useLocation } from 'react-router-dom';
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
+import { useRouteMatch } from 'react-router-dom';
 
 ListPageFeature.propTypes = {};
 
@@ -13,18 +13,18 @@ function ListPageFeature(props) {
   const initTodoList = [
     {
       id: 1,
-      name: "eat",
-      status: "new",
+      name: 'eat',
+      status: 'new',
     },
     {
       id: 2,
-      name: "code",
-      status: "completed",
+      name: 'code',
+      status: 'completed',
     },
     {
       id: 3,
-      name: "sleep",
-      status: "new",
+      name: 'sleep',
+      status: 'new',
     },
   ];
 
@@ -36,7 +36,7 @@ function ListPageFeature(props) {
     const params = queryString.parse(location.search);
     console.log(params);
 
-    return params.status || "all";
+    return params.status || 'all';
   });
 
   function hanedleTodoList(todo, idx) {
@@ -46,7 +46,7 @@ function ListPageFeature(props) {
     //toggle todo
     newTodoList[idx] = {
       ...newTodoList[idx],
-      status: newTodoList[idx].status === "new" ? "completed" : "new",
+      status: newTodoList[idx].status === 'new' ? 'completed' : 'new',
     };
 
     //update todo
@@ -56,26 +56,26 @@ function ListPageFeature(props) {
   useEffect(() => {
     const params = queryString.parse(location.search);
     // console.log(params);
-    setFilterStatus(params.status || "all");
+    setFilterStatus(params.status || 'all');
   }, [location.search]);
 
   const handleAllTodoList = () => {
     // setFilterStatus("all");
-    const queryParam = { status: "all" };
+    const queryParam = { status: 'all' };
     history.push({
       pathname: match.path,
       search: queryString.stringify(queryParam),
     });
   };
   const handleNewTodoList = () => {
-    const queryParam = { status: "new" };
+    const queryParam = { status: 'new' };
     history.push({
       pathname: match.path,
       search: queryString.stringify(queryParam),
     });
   };
   const handleCompletedTodoList = () => {
-    const queryParam = { status: "completed" };
+    const queryParam = { status: 'completed' };
     history.push({
       pathname: match.path,
       search: queryString.stringify(queryParam),
@@ -83,13 +83,11 @@ function ListPageFeature(props) {
   };
 
   const renderFileredTodoList = useMemo(() => {
-    return todoList.filter(
-      (todo) => filteredStatus === "all" || filteredStatus === todo.status
-    );
+    return todoList.filter((todo) => filteredStatus === 'all' || filteredStatus === todo.status);
   }, [todoList, filteredStatus]);
 
   function handleTodoSubmit(formValues) {
-    console.log("ValuesTodo", formValues);
+    console.log('ValuesTodo', formValues);
 
     const newTodoList = [...todoList];
     const todoValue = {
@@ -105,10 +103,7 @@ function ListPageFeature(props) {
   return (
     <div>
       <h1>TodoList</h1>
-      <TodoList
-        todoList={renderFileredTodoList}
-        onTodoClick={hanedleTodoList}
-      ></TodoList>
+      <TodoList todoList={renderFileredTodoList} onTodoClick={hanedleTodoList}></TodoList>
 
       <TodoForm onSubmit={handleTodoSubmit}></TodoForm>
 

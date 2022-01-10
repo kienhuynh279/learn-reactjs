@@ -1,8 +1,3 @@
-// import { useState } from "react";
-// import BetterClockFeature from "./features/BetterClock";
-// import ClockFeature from "./features/Clock";
-// import PostListFeature from "./features/PostList";
-
 import { NavLink, Route, Switch, Redirect } from "react-router-dom";
 import TodoFeature from "./features/Todo";
 import SongFeature from "./features/Song";
@@ -11,9 +6,23 @@ import PostListFeature from "./features/PostList";
 import MagicBoxFeature from "./features/MagicBox";
 import NotFound from "./components/NotFound";
 import "./App.css";
+import { useEffect } from "react";
+import productsApi from "./api/productApi";
 
 function App() {
-  // const [showClock, setShowClock] = useState(true)
+  useEffect(() => {
+    
+    const fetchProducts = async () => {
+      const params = {
+        _limit: 10
+      }
+      
+      const productList = await productsApi.getAll(params)
+      console.log(productList);
+    }
+
+    fetchProducts();
+  }, [])
 
   return (
     <div className="App">

@@ -6,6 +6,7 @@ import TodoForm from '../../components/TodoForm';
 import { useLocation } from 'react-router-dom';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import { useRouteMatch } from 'react-router-dom';
+import HookForm from '../../components/FormHook';
 
 ListPageFeature.propTypes = {};
 
@@ -100,8 +101,15 @@ function ListPageFeature(props) {
     setTodoList(newTodoList);
   }
 
+  const handleFormHook = (values) => {
+    console.log('onSubmit: ', values);
+  };
+
   return (
     <div>
+      <h1>Form Hook</h1>
+      <HookForm onSubmit={handleFormHook}></HookForm>
+
       <h1>TodoList</h1>
       <TodoList todoList={renderFileredTodoList} onTodoClick={hanedleTodoList}></TodoList>
 

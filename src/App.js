@@ -52,7 +52,7 @@ function App() {
         <Route path="/posts" component={PostListFeature}></Route>
         <Route path="/magic-box" component={MagicBoxFeature}></Route>
 
-        <Route component={NotFound}></Route>
+        {/* <Route component={NotFound}></Route> */}
       </Switch>
     </div>
   );

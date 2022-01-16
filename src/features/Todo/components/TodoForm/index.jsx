@@ -1,9 +1,9 @@
-import React, { useState } from "react";
-import PropTypes from "prop-types";
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 
 function TodoForm(props) {
   const { onSubmit } = props;
-  const [value, setValue] = useState("");
+  const [value, setValue] = useState('');
 
   const handleValueChange = (e) => {
     setValue(e.target.value);
@@ -17,11 +17,11 @@ function TodoForm(props) {
 
     const formValues = {
       name: value,
-      status: "new",
+      status: 'new',
     };
     onSubmit(formValues);
 
-    setValue("");
+    setValue('');
   }
 
   return (

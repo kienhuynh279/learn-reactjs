@@ -4,7 +4,6 @@ import SongFeature from "./features/Song";
 import BetterClockFeature from "./features/BetterClock";
 import PostListFeature from "./features/PostList";
 import MagicBoxFeature from "./features/MagicBox";
-import NotFound from "./components/NotFound";
 import "./App.css";
 import { useEffect } from "react";
 import productsApi from "./api/productApi";

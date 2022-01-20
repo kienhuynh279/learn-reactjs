@@ -13,6 +13,9 @@ InputField.propTypes = {
 
 function InputField(props) {
   const { form, name, label, disable } = props;
+  const { errors, formState } = form;
+
+  const hasError = formState.dirtyFields[name] && errors[name];
   return (
     <Controller
       name={name}
@@ -27,7 +30,7 @@ function InputField(props) {
           onBlur={onBlur} // notify when input is touched\
           label={label}
           disabled={disable}
-          error
+          error={hasError}
           helperText="Incorrect entry."
         />
       )}

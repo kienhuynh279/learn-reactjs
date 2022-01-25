@@ -17,7 +17,6 @@ function App() {
       }
       
       const productList = await productsApi.getAll(params)
-      console.log(productList);
     }
 
     fetchProducts();

@@ -14,26 +14,18 @@ InputField.propTypes = {
 function InputField(props) {
   const { form, name, label, disable } = props;
   const { errors, formState } = form;
+  const hasError = formState.touched[name] && errors[name];
 
-  const hasError = formState.dirtyFields[name] && errors[name];
   return (
     <Controller
       name={name}
       control={form.control}
-      render={({
-        field: { onChange, onBlur, value, name, ref },
-        fieldState: { invalid, isTouched, isDirty, error },
-      }) => (
-        <TextField
-          value={value}
-          onChange={onChange} // send value to hook form
-          onBlur={onBlur} // notify when input is touched\
-          label={label}
-          disabled={disable}
-          error={hasError}
-          helperText="Incorrect entry."
-        />
-      )}
+      as={TextField}
+      fullWidth
+      label={label}
+      disabled={disable}
+      error={!!hasError}
+      helperText={errors[name]?.message}
     />
   );
 }

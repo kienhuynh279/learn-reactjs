@@ -11,8 +11,9 @@ FormHook.propTypes = {
 
 function FormHook(props) {
   const schema = yup
-    .object({
-      title: yup.string().required(),
+    .object()
+    .shape({
+      title: yup.string().required('Please Enter Field !!!').min(5, 'Title is too short !!!'),
     })
     .required();
 
@@ -24,12 +25,17 @@ function FormHook(props) {
   });
 
   const handleSubmit = (values) => {
-    console.log('handleSubmit', values);
+    const { onSubmit } = props;
+    if (onSubmit) {
+      onSubmit(values);
+    }
+
+    form.reset();
   };
 
   return (
     <form onSubmit={form.handleSubmit(handleSubmit)}>
-      <InputField name="title" label="TODO" form={form}></InputField>
+      <InputField name="title" label="Todo" form={form}></InputField>
     </form>
   );
 }

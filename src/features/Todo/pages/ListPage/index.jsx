@@ -2,7 +2,6 @@ import React, { useEffect, useMemo } from 'react';
 import queryString from 'query-string';
 import TodoList from '../../components/TodoList';
 import { useState } from 'react';
-import TodoForm from '../../components/TodoForm';
 import { useLocation } from 'react-router-dom';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import { useRouteMatch } from 'react-router-dom';
@@ -35,12 +34,11 @@ function ListPageFeature(props) {
   const [todoList, setTodoList] = useState(initTodoList);
   const [filteredStatus, setFilterStatus] = useState(() => {
     const params = queryString.parse(location.search);
-    console.log(params);
 
     return params.status || 'all';
   });
 
-  function hanedleTodoList(todo, idx) {
+  function hanedleTodoItem(todo, idx) {
     //clone one new array
     const newTodoList = [...todoList];
 
@@ -56,12 +54,10 @@ function ListPageFeature(props) {
 
   useEffect(() => {
     const params = queryString.parse(location.search);
-    // console.log(params);
     setFilterStatus(params.status || 'all');
   }, [location.search]);
 
   const handleAllTodoList = () => {
-    // setFilterStatus("all");
     const queryParam = { status: 'all' };
     history.push({
       pathname: match.path,
@@ -87,34 +83,26 @@ function ListPageFeature(props) {
     return todoList.filter((todo) => filteredStatus === 'all' || filteredStatus === todo.status);
   }, [todoList, filteredStatus]);
 
-  function handleTodoSubmit(formValues) {
-    console.log('ValuesTodo', formValues);
-
-    const newTodoList = [...todoList];
-    const todoValue = {
+  const handleFormSubmit = (values) => {
+    const newTodo = {
       id: todoList.length + 1,
-      ...formValues,
+      title: values.title,
+      status: 'new',
     };
 
-    newTodoList.push(todoValue);
+    const newTodoList = [...todoList, newTodo];
+    console.log('new todo list:', newTodoList);
 
     setTodoList(newTodoList);
-  }
-
-  const handleFormHook = (values) => {
-    console.log('onSubmit: ', values);
   };
 
   return (
     <div>
       <h1>Form Hook</h1>
-      <HookForm onSubmit={handleFormHook}></HookForm>
+      <HookForm onSubmit={handleFormSubmit}></HookForm>
 
       <h1>TodoList</h1>
-      <TodoList todoList={renderFileredTodoList} onTodoClick={hanedleTodoList}></TodoList>
-
-      <TodoForm onSubmit={handleTodoSubmit}></TodoForm>
-
+      <TodoList todoList={renderFileredTodoList} onTodoClick={hanedleTodoItem}></TodoList>
       <div>
         <button onClick={handleAllTodoList}>Show All</button>
         <button onClick={handleNewTodoList}>Show new</button>
